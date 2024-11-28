@@ -1,0 +1,54 @@
+# Create playbooks directory 
+mkdir playbooks
+
+# Create 5 different playbooks
+vim mariadb_setup.yml
+vim memcached_setup.yml
+vim rabbitmq_setup.yml
+vim tomcat_setup.yml
+vim nginx_setup.yml
+
+# Run playbooks
+ansible-playbook mariadb_setup.yml
+ansible-playbook memcached_setup.yml
+ansible-playbook rabbitmq_setup.yml
+ansible-playbook tomcat_setup.yml
+ansible-playbook nginx_setup.yml
+
+# To ensure each playbook runs on specific hosts: Define hosts in the playbook header.
+# Then specify the appropriate host groups in your Ansible inventory.
+
+## MariaDB Setup Playbook ##
+---
+- hosts: mariadb
+  become: yes
+  roles:
+    - mariadb_setup
+
+## Memcached Setup Playbook ##
+---
+- hosts: memcache
+  become: yes
+  roles:
+    - memcached_setup
+
+## Nginx Setup Playbook ##
+---
+- hosts: nginx
+  become: yes
+  roles:
+    - nginx_setup
+
+## RabbitMQ Setup Playbook ##
+---
+- hosts: rabbitmq
+  become: yes
+  roles:
+    - rabbitmq_setup
+
+## Tomcat Setup Playbook ##
+---
+- hosts: tomcat
+  become: yes
+  roles:
+    - tomcat_setup
